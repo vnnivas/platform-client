@@ -66,6 +66,7 @@ angular.module('ushahidi.posts', [])
 .directive('savedSearchListing', require('./savedsearches/listing.directive.js'))
 .directive('savedSearchModeContext', require('./savedsearches/mode-context.directive.js'))
 
+.service('CollectionsService', require('./collections/collections.service.js'))
 .directive('collectionModeContext', require('./collections/mode-context.directive.js'))
 .directive('collectionEditor', require('./collections/editor.directive.js'))
 .directive('collectionListing', require('./collections/listing.directive.js'))

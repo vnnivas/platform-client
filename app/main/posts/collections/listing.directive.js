@@ -9,7 +9,7 @@ function CollectionListing() {
         scope: {
         },
         controller: CollectionListingController,
-        templateUrl: 'templates/main/posts/collections/collection-listing.html'
+        templateUrl: 'templates/main/posts/collections/listing.html'
     };
 }
 
