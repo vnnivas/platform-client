@@ -71,6 +71,9 @@ angular.module('ushahidi.posts', [])
 .directive('collectionEditor', require('./collections/editor.directive.js'))
 .directive('collectionListing', require('./collections/listing.directive.js'))
 
+.directive('collectionToggleButton', require('./common/collection-toggle/collection-toggle-button.js'))
+.directive('collectionToggleLink', require('./common/collection-toggle/collection-toggle-link.js'))
+
 
 .config(require('./posts-routes.js'))
 
