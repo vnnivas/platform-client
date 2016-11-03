@@ -21,7 +21,8 @@ CollectionListingController.$inject = [
     '$q',
     'Notify',
     'CollectionEndpoint',
-    '_'
+    '_',
+    'CollectionsService'
 ];
 function CollectionListingController(
     $rootScope,
@@ -31,7 +32,8 @@ function CollectionListingController(
     $q,
     Notify,
     CollectionEndpoint,
-    _
+    _,
+    CollectionsService
 ) {
     $scope.collectionListingVisible = false;
     $scope.path = '/collections/';
@@ -159,7 +161,8 @@ function CollectionListingController(
     // after the creation, along with the newly created collection
     function createNewCollection() {
         $scope.collectionListingVisible = false;
-        $scope.isToggleMode ? $rootScope.$emit('collectionCreate:show', $scope.posts) : $rootScope.$emit('collectionEditor:show');
+        // @todo suspect we can just always pass posts, its just empty if we're not toggling
+        $scope.isToggleMode ? CollectionsService.createCollection($scope.posts) : CollectionsService.createCollection();
     }
 
     // Search and filter collection list by query term

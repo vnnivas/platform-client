@@ -5,6 +5,8 @@ function CollectionEditor() {
     return {
         restrict: 'E',
         scope: {
+            collection: '<',
+            posts: '='
         },
         controller: CollectionEditorController,
         templateUrl: 'templates/main/posts/collections/editor.html'
@@ -39,7 +41,7 @@ function CollectionEditorController(
     $scope.isAdmin = $rootScope.isAdmin;
     $scope.views = ViewHelper.views();
 
-    $scope.setBasicCollection = setBasicCollection;
+    // $scope.setBasicCollection = setBasicCollection;
     $scope.featuredEnabled = featuredEnabled;
     $scope.cancel = cancel;
     $scope.saveCollection = saveCollection;
@@ -49,7 +51,9 @@ function CollectionEditorController(
 
     function activate() {
         if (!$scope.collection) {
-            $scope.setBasicCollection();
+            setBasicCollection();
+        } else {
+            $scope.cpyCollection = _.clone($scope.collection);
         }
 
         RoleEndpoint.query().$promise.then(function (roles) {
@@ -57,16 +61,16 @@ function CollectionEditorController(
         });
     }
 
-    $rootScope.$on('collectionEditor:show', function (event, collection) {
+    /*$rootScope.$on('collectionEditor:show', function (event, collection) {
         // Set inbound collection
         // if no collection is provided then we are creating
         // a collection
         $scope.collection = collection;
         $scope.cpyCollection = _.clone($scope.collection);
         $scope.collectionEditorVisible = true;
-    });
+    });*/
 
-    $rootScope.$on('collectionCreate:show', function (event, posts) {
+    /*$rootScope.$on('collectionCreate:show', function (event, posts) {
         // Set inbound posts
         // if posts are provided then we need to pass flow
         // back to collection listing once creation is complete
@@ -77,14 +81,13 @@ function CollectionEditorController(
             $scope.posts = posts;
         }
         $scope.collectionEditorVisible = true;
-    });
+    });*/
 
     // Set default view for Collection to be Map
     function setBasicCollection() {
-        $scope.collection = {};
-        $scope.collection.view = 'map';
-        $scope.collection.visible_to = [];
-        $scope.cpyCollection = _.clone($scope.collection);
+        $scope.cpyCollection = {};
+        $scope.cpyCollection.view = 'map';
+        $scope.cpyCollection.visible_to = [];
     }
 
     function featuredEnabled() {
